@@ -14,8 +14,8 @@ public class Transacao {
     private Double valor;
     private TransacaoSituacao situacao;
     private TransacaoTipo tipo;
-    private int clienteId;
-    private int funcionarioId;
+    private String clienteCPF;
+    private String funcionarioNome;
     private List<Livro> livros;
 
     public Transacao(
@@ -24,8 +24,8 @@ public class Transacao {
             Double valor,
             TransacaoSituacao situacao,
             TransacaoTipo tipo,
-            int clienteId,
-            int funcionarioId,
+            String clienteCPF,
+            String funcionarioNome,
             List<Livro> livros
     ) {
         this.dataInicio = dataInicio;
@@ -33,8 +33,8 @@ public class Transacao {
         this.valor = valor;
         this.situacao = situacao;
         this.tipo = tipo;
-        this.clienteId = clienteId;
-        this.funcionarioId = funcionarioId;
+        this.clienteCPF = clienteCPF;
+        this.funcionarioNome = funcionarioNome;
         this.livros = livros;
     }
 
@@ -46,20 +46,20 @@ public class Transacao {
         this.livros = livros;
     }
 
-    public int getFuncionarioId() {
-        return funcionarioId;
+    public String getFuncionarioNome() {
+        return funcionarioNome;
     }
 
-    public void setFuncionarioId(int funcionarioId) {
-        this.funcionarioId = funcionarioId;
+    public void setFuncionarioNome(String funcionarioNome) {
+        this.funcionarioNome = funcionarioNome;
     }
 
-    public int getClienteId() {
-        return clienteId;
+    public String getClienteCPF() {
+        return clienteCPF;
     }
 
-    public void setClienteId(int clienteId) {
-        this.clienteId = clienteId;
+    public void setClienteCPF(String clienteCPF) {
+        this.clienteCPF = clienteCPF;
     }
 
     public TransacaoTipo getTipo() {
@@ -112,5 +112,3 @@ public class Transacao {
         }
     }
 }
-
-

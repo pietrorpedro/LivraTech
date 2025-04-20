@@ -60,8 +60,8 @@ public class Transacoes {
                 transacao.getValor() + ";" +
                 transacao.getSituacao() + ";" +
                 transacao.getTipo() + ";" +
-                transacao.getClienteId() + ";" +
-                transacao.getFuncionarioId() + ";" +
+                transacao.getClienteCPF() + ";" +
+                transacao.getFuncionarioNome() + ";" +
                 livrosIds;
     }
 }
