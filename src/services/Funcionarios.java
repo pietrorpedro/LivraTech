@@ -51,4 +51,28 @@ public class Funcionarios {
                 funcionario.getSenha() + ";" +
                 funcionario.getFuncionarioTipo();
     }
+
+    public Funcionario autenticar(String nome, String senha) {
+        try {
+
+            if (Files.exists(Paths.get(CAMINHO_ARQUIVO))) {
+                List<String> linhas = Files.readAllLines(Paths.get(CAMINHO_ARQUIVO));
+
+                // verifica linha por linha se o login esta certo
+                for (String linha : linhas) {
+                    String[] dados = linha.split(";");
+                    if (dados[1].equals(nome) && dados[2].equals(senha)) {
+                        Funcionario funcionario = new Funcionario(dados[1], dados[2], enums.FuncionarioTipo.valueOf(dados[3]));
+                        funcionario.setId(Integer.parseInt(dados[0]));
+
+                        return funcionario;
+                    }
+                }
+            }
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }
