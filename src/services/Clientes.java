@@ -43,6 +43,25 @@ public class Clientes {
         }
     }
 
+    public Cliente buscarClientePorCpf(String cpf) {
+        try {
+            if (!Files.exists(Paths.get(CAMINHO_ARQUIVO))) return null;
+
+            List<String> linhas = Files.readAllLines(Paths.get(CAMINHO_ARQUIVO));
+            for (String linha : linhas) {
+                String[] dados = linha.split(";");
+                if (dados[2].equals(cpf)) {
+                    Cliente cliente = new Cliente(dados[1], dados[2], dados[3], Boolean.parseBoolean(dados[4]));
+                    cliente.setId(Integer.parseInt(dados[0]));
+                    return cliente;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private String formatarCliente(Cliente cliente) {
         return cliente.getId() + ";" +
                 cliente.getNome() + ";" +
