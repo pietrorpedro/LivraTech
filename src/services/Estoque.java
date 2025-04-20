@@ -78,6 +78,16 @@ public class Estoque {
 
     }
 
+    public Livro buscarLivroPorId(int idLivro) {
+        List<Livro> livros = carregarLivros();
+        for (Livro livro : livros) {
+            if (livro.getId() == idLivro) {
+                return livro;
+            }
+        }
+        return null;
+    }
+
     private String formatarLivro(Livro livro) {
         return livro.getId() + ";" +
                 livro.getTitulo() + ";" +
