@@ -1,5 +1,7 @@
 package models;
 
+import enums.CategoriaLivro;
+
 public class Livro {
 
     private int id;
