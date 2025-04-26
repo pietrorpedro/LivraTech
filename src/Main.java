@@ -1,3 +1,4 @@
+import com.sun.net.httpserver.HttpServer;
 import enums.FuncionarioTipo;
 import enums.TransacaoSituacao;
 import enums.TransacaoTipo;
@@ -10,6 +11,12 @@ import services.Estoque;
 import services.Funcionarios;
 import services.Transacoes;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +26,9 @@ class Main {
 
     private static Funcionario funcionarioLogado;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        iniciarApi();
+
         System.out.println("------------------------------------");
         System.out.println("Bem-vindo(a) ao sistema da LivraTech");
         System.out.println("------------------------------------");
@@ -174,5 +183,23 @@ class Main {
         }
     }
 
+    private static void iniciarApi() throws IOException {
+        HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
+        server.start();
+    }
+
+    public static void chamarApi(String rota, String metodo, String jsonData) throws Exception {
+        URL url = new URL("http://localhost:8080" + rota);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod(metodo);
+        conn.setDoOutput(true);
+
+        if (!jsonData.isEmpty()) {
+            byte[] input = jsonData.getBytes(StandardCharsets.UTF_8);
+            conn.setRequestProperty("Content-Type", "application/json");
+            OutputStream os = conn.getOutputStream();
+            os.write(input, 0, input.length);
+        }
+    }
 }
