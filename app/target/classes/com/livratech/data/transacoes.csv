@@ -1,0 +1,2 @@
+id;transacaoTipo;dataInicio;dataFim;valor;transacaoSituacao;clienteId;funcionarioId;livroIds
+1;VENDA;28-05-2025;28-05-2025;50.0;CONCLUIDA;2;3;2
