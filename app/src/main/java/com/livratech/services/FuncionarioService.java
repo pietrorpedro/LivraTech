@@ -46,28 +46,54 @@ public class FuncionarioService {
         }
     }
 
-        public Funcionario encontrarFuncionarioPorId(int id) {
+    public Funcionario encontrarFuncionarioPorId(int id) {
         try {
             Reader reader = new FileReader(CAMINHO);
 
             CsvToBean<Funcionario> csvToBean = new CsvToBeanBuilder<Funcionario>(reader)
-                .withType(Funcionario.class)
-                .withSkipLines(1)
-                .withSeparator(';')
-                .withIgnoreLeadingWhiteSpace(true)
-                .build();
+                    .withType(Funcionario.class)
+                    .withSkipLines(1)
+                    .withSeparator(';')
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
 
             List<Funcionario> funcionarios = csvToBean.parse();
             reader.close();
 
             return funcionarios.stream()
-                .filter(f -> f.getId() == id)
-                .findFirst()
-                .orElse(null);
+                    .filter(f -> f.getId() == id)
+                    .findFirst()
+                    .orElse(null);
 
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
     }
+
+    public Funcionario encontrarFuncionarioPorNome(String nome) {
+        try {
+            Reader reader = new FileReader(CAMINHO);
+
+            CsvToBean<Funcionario> csvToBean = new CsvToBeanBuilder<Funcionario>(reader)
+                    .withType(Funcionario.class)
+                    .withSkipLines(1)
+                    .withSeparator(';')
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+
+            List<Funcionario> funcionarios = csvToBean.parse();
+            reader.close();
+
+            return funcionarios.stream()
+                    .filter(f -> f.getNome().equalsIgnoreCase(nome))
+                    .findFirst()
+                    .orElse(null);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

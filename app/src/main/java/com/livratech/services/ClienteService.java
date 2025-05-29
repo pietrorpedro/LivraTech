@@ -70,4 +70,29 @@ public class ClienteService {
         }
     }
 
+        public Cliente encontrarClientePorCPF(String cpf) {
+        try {
+            Reader reader = new FileReader(CAMINHO);
+
+            CsvToBean<Cliente> csvToBean = new CsvToBeanBuilder<Cliente>(reader)
+                    .withType(Cliente.class)
+                    .withSkipLines(1)
+                    .withSeparator(';')
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+
+            List<Cliente> clientes = csvToBean.parse();
+            reader.close();
+
+            return clientes.stream()
+                    .filter(c -> c.getCPF().equals(cpf))
+                    .findFirst()
+                    .orElse(null);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

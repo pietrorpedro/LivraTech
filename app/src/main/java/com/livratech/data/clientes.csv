@@ -1,2 +1,3 @@
 id;nome;clienteVip;CPF;endereco
 1;Joana;false;11122233344;Rua feliz, 2
+2;Ciclano;true;22233344456;Rua feliz, 32

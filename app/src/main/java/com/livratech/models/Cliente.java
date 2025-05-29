@@ -39,7 +39,7 @@ public class Cliente extends Usuario{
     }
 
     public Cliente() {
-        super(0, "");
+        super(CSVIDGenerator.generate("app\\src\\main\\java\\com\\livratech\\data\\clientes.csv"), "");
     }
 
     public Cliente( 
