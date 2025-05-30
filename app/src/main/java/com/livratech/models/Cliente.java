@@ -1,5 +1,6 @@
 package com.livratech.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.livratech.utils.CSVIDGenerator;
 import com.opencsv.bean.CsvBindByPosition;
 
@@ -9,6 +10,7 @@ public class Cliente extends Usuario{
     private boolean clienteVip;
 
     @CsvBindByPosition(position = 3)
+    @JsonProperty("CPF")
     private String CPF;
 
     @CsvBindByPosition(position = 4)
