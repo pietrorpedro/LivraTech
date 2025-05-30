@@ -3,6 +3,8 @@ package com.livratech.server;
 import com.fasterxml.jackson.databind.ObjectMapper;
 // import com.livratech.controllers.CarrinhoController;
 import com.livratech.controllers.ClienteController;
+import com.livratech.controllers.LivroController;
+import com.livratech.controllers.RelatorioController;
 import com.livratech.controllers.TransacaoController;
 
 import io.javalin.Javalin;
@@ -28,6 +30,11 @@ public class Init {
         app.get("/transacoes", TransacaoController.getTransacoes);
         app.post("/transacoes", TransacaoController.postTransacao);
         app.post("/transacoes/devolucao", TransacaoController.postTransacaoDevolucao);
+
+        app.post("/livros", LivroController.postLivro);
+
+        app.get("/relatorio/vendas", RelatorioController.getVendas);
+        app.get("/relatorio/clientes", RelatorioController.quantidadeClientes);
 
         // app.get("/carrinho", carrinhoController.listarCarrinho);
         // app.post("/carrinho", carrinhoController.adicionarLivro);

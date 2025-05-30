@@ -16,10 +16,31 @@ import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 
 public class ClienteService {
-    
+
     private static final String CAMINHO = "app\\src\\main\\java\\com\\livratech\\data\\clientes.csv";
 
-        public void inserirCliente(Cliente cliente) {
+    public List<Cliente> listarTodosClientes() {
+        try {
+            Reader reader = new FileReader(CAMINHO);
+
+            CsvToBean<Cliente> csvToBean = new CsvToBeanBuilder<Cliente>(reader)
+                    .withType(Cliente.class)
+                    .withSkipLines(1)
+                    .withSeparator(';')
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+
+            List<Cliente> clientes = csvToBean.parse();
+            reader.close();
+
+            return clientes;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return List.of();
+        }
+    }
+
+    public void inserirCliente(Cliente cliente) {
         try {
             // Garante que a pasta exista
             Files.createDirectories(Paths.get("app\\src\\main\\java\\com\\livratech\\data"));
@@ -70,7 +91,7 @@ public class ClienteService {
         }
     }
 
-        public Cliente encontrarClientePorCPF(String cpf) {
+    public Cliente encontrarClientePorCPF(String cpf) {
         try {
             Reader reader = new FileReader(CAMINHO);
 

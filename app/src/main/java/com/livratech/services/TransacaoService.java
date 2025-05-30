@@ -174,4 +174,53 @@ public class TransacaoService {
         return ids;
     }
 
+    public List<TransacaoResponseDTO> buscarTodasTransacoesComoDTO() {
+        List<TransacaoResponseDTO> transacoesDTO = new ArrayList<>();
+
+        try (Reader reader = new FileReader(CAMINHO);
+                BufferedReader bufferedReader = new BufferedReader(reader)) {
+
+            ClienteService clienteService = new ClienteService();
+
+            String linha;
+            bufferedReader.readLine(); // pular cabeçalho
+
+            while ((linha = bufferedReader.readLine()) != null) {
+                String[] dados = linha.split(";");
+
+                int id = Integer.parseInt(dados[0]);
+                String tipo = dados[1];
+                String dataInicio = dados[2];
+                String dataFim = dados[3];
+                double valor = Double.parseDouble(dados[4]);
+                String situacao = dados[5];
+
+                int clienteId = Integer.parseInt(dados[6]);
+                String cpf = clienteService.encontrarClientePorId(clienteId) != null
+                        ? clienteService.encontrarClientePorId(clienteId).getCPF()
+                        : "N/A";
+
+                int funcionarioId = Integer.parseInt(dados[7]);
+                List<Integer> livrosIds = converterParaListaDeIds(dados[8]);
+
+                TransacaoResponseDTO dto = new TransacaoResponseDTO(
+                        id,
+                        tipo,
+                        dataInicio,
+                        dataFim,
+                        valor,
+                        situacao,
+                        cpf,
+                        funcionarioId,
+                        livrosIds);
+                transacoesDTO.add(dto);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return transacoesDTO;
+    }
+
 }

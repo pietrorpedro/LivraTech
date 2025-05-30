@@ -1,3 +1,4 @@
 id;titulo;autor;categoriaLivro;preco;numeroPaginas;estoque
-1;Um cara legal;Jose Falero;HISTORIA;50.0;230;1
+1;Um cara legal;Jose Falero;HISTORIA;50.0;230;0
 2;Um cara chato;Rosa Flores;HISTORIA;100.0;200;3
+3;Test;tester;TERROR;200.0;320;32
